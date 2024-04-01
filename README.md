@@ -2,7 +2,7 @@
 APLIKASI MOBILE A081
 Nama Anggota :
 Marchel Adias Pradana (21081010084)
-Jozanda Aulia (NPM)
+Jozanda Aulia (21081010209)
 
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
