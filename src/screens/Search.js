@@ -202,31 +202,37 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
   },
+
   musicArtist: {
     color: 'black',
     fontSize: 15,
   },
+
   containerCategory: {
     flexDirection: 'row',
     gap: 30,
     alignItems: 'stretch',
     flexWrap: 'wrap',
   },
+
   backgroundCategory: {
     width: 150,
     height: 100,
     borderRadius: 10,
   },
+
   categoryTitle: {
     fontSize: 15,
     fontWeight: 'bold',
     color: 'white',
     margin: 20,
   },
+
   categoryImage: {
     position: 'absolute',
     right: 15,
     bottom: 10,
   },
 });
+
 export default Search;
