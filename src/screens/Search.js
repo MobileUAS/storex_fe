@@ -59,7 +59,7 @@ class Search extends Component {
             <Text style={styles.musicArtist}>{item.artist}</Text>
           </View>
         </View>
-        <Image source={require('../image/playMusic.png')}/>
+        <Image source={require('../image/playMusic.png')} />
       </View>
     ));
   }
@@ -90,7 +90,9 @@ class Search extends Component {
 
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.scrollContainer}>
+        <ScrollView
+          style={styles.scrollContainer}
+          contentContainerStyle={styles.scrollContent}>
 
           <View style={styles.header}>
             <HeaderComponent title={'Search'} fontSize={40} />
@@ -139,6 +141,10 @@ const styles = StyleSheet.create({
 
   scrollContainer: {
     marginBottom: 60,
+  },
+
+  scrollContent: {
+    paddingBottom: 20,
   },
 
   header: {
@@ -222,6 +228,5 @@ const styles = StyleSheet.create({
     right: 15,
     bottom: 10,
   },
-
 });
 export default Search;

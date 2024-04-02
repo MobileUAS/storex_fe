@@ -65,25 +65,20 @@ class Home extends Component {
             <ImageBackground
               source={require('../image/heroImage.png')}
               style={styles.heroimg}
-              imageStyle={{borderRadius: 20}}>
+              imageStyle={styles.heroImageStyle}>
               <View style={styles.fonthero}>
-                <Text
-                  style={{
-                    color: 'white',
-                    fontSize: 20,
-                    fontWeight: 'bold',
-                    width: '70%',
-                  }}>
-                  Official Video Music
-                </Text>
+                <Text style={styles.heroText}>Official Video Music</Text>
                 <HorizontalLine width={'70%'} />
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={styles.heroProfile}>
                   <Image
                     source={require('../image/profile.png')}
-                    style={{height: 35, width: 35, marginRight: 5}}
+                    style={styles.profileImage}
                   />
-                  <Text style={{color: '#888888'}}>by Salma</Text>
-                  <Image source={require('../image/playHome.png')} style={{position: 'absolute', right: -130, bottom: 5}} />
+                  <Text style={styles.profileText}>by Salma</Text>
+                  <Image
+                    source={require('../image/playHome.png')}
+                    style={styles.playIcon}
+                  />
                 </View>
               </View>
             </ImageBackground>
@@ -117,12 +112,48 @@ const styles = StyleSheet.create({
     height: 229,
   },
 
+  heroImageStyle: {
+    borderRadius: 20,
+  },
+
   fonthero: {
     marginLeft: 20,
     marginBottom: 20,
     position: 'absolute',
     bottom: 0,
     justifyContent: 'flex-end',
+  },
+
+  heroText: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+    width: '70%',
+  },
+
+  heroLineWidth: {
+    width: '70%',
+  },
+
+  heroProfile: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  profileImage: {
+    height: 35,
+    width: 35,
+    marginRight: 5,
+  },
+
+  profileText: {
+    color: '#888888',
+  },
+
+  playIcon: {
+    position: 'absolute',
+    right: -130,
+    bottom: 5,
   },
 
   description: {
