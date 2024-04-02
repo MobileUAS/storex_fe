@@ -15,9 +15,9 @@ const HorizontalLine = ({width, alignSelf}) => {
 
 const styles = StyleSheet.create({
   line: {
-    borderBottomColor: '#888888', // Warna garis
-    borderBottomWidth: 1, // Lebar garis default
-    marginVertical: 10, // Jarak vertikal dari garis ke konten sekitarnya
+    borderBottomColor: '#888888',
+    borderBottomWidth: 1,
+    marginVertical: 10,
   },
 });
 

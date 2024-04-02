@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import React, {Component} from 'react';
-import {View, Text, TouchableOpacity, Image, StyleSheet, ScrollView} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import NavBar from '../components/NavBar';
 import HeaderComponent from '../components/HeaderComponent';
 import HorizontalLine from '../components/HorizontalLine';
@@ -61,7 +61,7 @@ class Library extends Component {
 
   renderMusicItems() {
     return MUSIC.map((item, index) => (
-      <View key={index}>
+      <View key={index} style={styles.containerMusicPlaylist}>
         <View style={styles.musicItem}>
           <Image source={item.image} style={styles.musicImage} />
           <View style={styles.musicDetails}>
@@ -69,6 +69,7 @@ class Library extends Component {
             <Text style={styles.musicArtist}>{item.artist}</Text>
           </View>
         </View>
+        <Image source={require('../image/playMusic.png')} />
       </View>
     ));
   }
@@ -90,7 +91,7 @@ class Library extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView>
+        <ScrollView style={styles.scrollContainer}>
           <View style={styles.header}>
             <HeaderComponent title={'Library'} fontSize={40} />
           </View>
@@ -111,25 +112,36 @@ class Library extends Component {
             {this.renderPlaylistItems()}
           </View>
         </ScrollView>
-       <NavBar navigation={this.props.navigation} />
+        <NavBar navigation={this.props.navigation} />
       </View>
     );
   }
 }
 
-const styles =StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 20,
+    padding: 20,
+  },
+
+  scrollContainer: {
+    marginBottom: 60,
   },
 
   header: {
-    marginBottom:0,
+    marginBottom: 0,
   },
 
-  containerFav:{
+  containerFav: {
     marginTop: 0,
     marginBottom: 10,
+  },
+
+  containerMusicPlaylist: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingRight: 20,
+    alignItems: 'center',
   },
 
   containerMusic: {
@@ -144,8 +156,8 @@ const styles =StyleSheet.create({
 
   musicImage: {
     borderRadius: 10,
-    width:70,
-    height:70,
+    width: 70,
+    height: 70,
   },
 
   musicDetails: {
@@ -161,7 +173,6 @@ const styles =StyleSheet.create({
     color: 'black',
     fontSize: 15,
   },
-})
-
+});
 
 export default Library;

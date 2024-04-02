@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
   StyleSheet,
   Image,
   ImageBackground,
@@ -83,7 +82,8 @@ class Home extends Component {
                     source={require('../image/profile.png')}
                     style={{height: 35, width: 35, marginRight: 5}}
                   />
-                  <Text style={{color: '#888888'}}>by One dek</Text>
+                  <Text style={{color: '#888888'}}>by Salma</Text>
+                  <Image source={require('../image/playHome.png')} style={{position: 'absolute', right: -130, bottom: 5}} />
                 </View>
               </View>
             </ImageBackground>
@@ -94,10 +94,6 @@ class Home extends Component {
             <HorizontalLine width={'100%'} />
             {this.renderMusicItems()}
           </View>
-
-          {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('Detail')}>
-            <Text>Pindah Sceen ke Detail</Text>
-          </TouchableOpacity> */}
         </ScrollView>
 
         <NavBar navigation={this.props.navigation} />
@@ -109,7 +105,7 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 20,
+    padding: 20,
   },
 
   header: {
@@ -156,6 +152,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
+
   musicArtist: {
     color: 'gray',
     fontSize: 16,
