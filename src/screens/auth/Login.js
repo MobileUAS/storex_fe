@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image, TextInput, StyleSheet } from 'react-native';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
-import Icon from 'react-native-vector-icons/FontAwesome';  // Misalnya kita menggunakan ikon dari FontAwesome
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Checkbox } from 'react-native-paper';
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      rememberMe: false,
     };
   }
 
@@ -20,9 +22,13 @@ class Login extends Component {
     this.setState({ password });
   }
 
+  toggleRememberMe = () => {
+    this.setState({ rememberMe: !this.state.rememberMe });
+  }
+
   render() {
     const { navigation } = this.props;
-    const { email, password } = this.state;
+    const { email, password, rememberMe } = this.state;
 
     return (
       <View style={styles.container}>
@@ -57,10 +63,24 @@ class Login extends Component {
             />
           </View>
         </View>
+        <View style={styles.checkboxContainer}>
+          <Checkbox
+            status={rememberMe ? 'checked' : 'unchecked'}
+            onPress={this.toggleRememberMe}
+            style={styles.checkbox}
+          />
+          <Text style={styles.checkboxLabel}>Remember me</Text>
+          <TouchableOpacity onPress={() => {}} style={styles.forgotPasswordContainer}>
+            <Text style={styles.forgotPassword}>Forgot Password?</Text>
+          </TouchableOpacity>
+        </View>
         <TouchableOpacity style={styles.button}>
-          <Icon2 name="login" size={30} color="#fff" />
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+        <View style={{height:30}}/>
+        <Text style={{}}>
+          CREATE ACCOUNT
+        </Text>
       </View>
     );
   }
@@ -114,15 +134,35 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 40,
   },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  checkbox: {
+    marginRight: 10,
+  },
+  checkboxLabel: {
+    marginRight: 20,
+  },
+  forgotPasswordContainer: {
+    marginLeft: 50,
+  },
+  forgotPassword: {
+    color: 'black',
+    textDecorationLine: 'underline',
+  },
   button: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'blue',
-    padding: 10,
+    backgroundColor: 'black',
+    paddingHorizontal: 130,
+    paddingVertical: 10,
     borderRadius: 5,
   },
   buttonText: {
     color: 'white',
+    fontFamily:'Poppins-Regular',
     marginLeft: 10,
     fontSize: 16,
   },
