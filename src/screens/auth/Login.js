@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Image, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Image, TextInput, StyleSheet, Alert } from 'react-native';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Checkbox } from 'react-native-paper';
+import axios from 'axios';
 
 class Login extends Component {
   constructor(props) {
@@ -24,6 +25,20 @@ class Login extends Component {
 
   toggleRememberMe = () => {
     this.setState({ rememberMe: !this.state.rememberMe });
+  }
+
+  handleLogin = async () => {
+    const { email, password } = this.state
+    try {
+      const response = await axios.post('http://192.168.18.255:3000/users', { email, password })
+      if (response.data.success) {
+        Alert.alert('Login Success', 'You have logged in successfully');
+      } else {
+        Alert.alert('Login Error', 'Invalid email or password');
+      }
+    } catch (error) {
+      Alert.alert('Login Error', 'An error occurred during login');
+    }
   }
 
   render() {
@@ -51,6 +66,7 @@ class Login extends Component {
               style={styles.textInput}
               placeholder="Enter your email"
               placeholderTextColor={"white"}
+              
             />
           </View>
           <View style={styles.inputWrapper}>
@@ -77,15 +93,17 @@ class Login extends Component {
             <Text style={styles.forgotPassword}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <View style={{height:30}}/>
-        <Text style={{
-          color:"white"
-        }}>
-          CREATE ACCOUNT
-        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+          <Text style={{
+            color:"white"
+          }}>
+            CREATE ACCOUNT
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -138,6 +156,7 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     height: 40,
+    color:'white'
   },
   checkboxContainer: {
     flexDirection: 'row',
