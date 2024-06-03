@@ -1,113 +1,94 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, TextInput, StyleSheet, Alert } from 'react-native';
-import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Checkbox } from 'react-native-paper';
 import axios from 'axios';
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      rememberMe: false,
-    };
-  }
+const Login = ({ navigation }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
 
-  handleEmailChange = (email) => {
-    this.setState({ email });
-  }
-
-  handlePasswordChange = (password) => {
-    this.setState({ password });
-  }
-
-  toggleRememberMe = () => {
-    this.setState({ rememberMe: !this.state.rememberMe });
-  }
-
-  handleLogin = async () => {
-    const { email, password } = this.state
+  const handleLogin = async () => {
     try {
-      const response = await axios.post('http://192.168.18.255:3000/users', { email, password })
-      if (response.data.success) {
+      // console.log('Sending email:', email);
+      // console.log('Sending password:', password);
+  
+      const response = await axios.post('http://192.168.1.5:3000/users/login', { email, password });//gae ip dewe dewe rek ipconfig moro doleono Ipv4
+      console.log('Response data:', response.data);
+  
+      if (response.data.message === "Login successful") {
         Alert.alert('Login Success', 'You have logged in successfully');
       } else {
         Alert.alert('Login Error', 'Invalid email or password');
       }
     } catch (error) {
+      console.error('Login error:', error);
+      console.error('Error response:', error.response);
       Alert.alert('Login Error', 'An error occurred during login');
     }
-  }
+  };
 
-  render() {
-    const { navigation } = this.props;
-    const { email, password, rememberMe } = this.state;
 
-    return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Image
-            source={require('../../../assets/images/logo/logo.png')}
-            style={styles.logo}
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Image
+          source={require('../../../assets/images/logo/logo.png')}
+          style={styles.logo}
+        />
+        <Text style={styles.title}>
+          STO<Text style={styles.highlight}>REX</Text>
+        </Text>
+        <Text style={styles.subtitle}>Login</Text>
+      </View>
+      <View style={styles.inputContainer}>
+        <View style={styles.inputWrapper}>
+          <Icon name="user" size={20} color="white" style={styles.icon} />
+          <TextInput
+            value={email}
+            onChangeText={setEmail}
+            style={styles.textInput}
+            placeholder="Enter your email"
+            placeholderTextColor="white"
           />
-          <Text style={styles.title}>
-            STO<Text style={styles.highlight}>REX</Text>
-          </Text>
-          <Text style={styles.subtitle}>Login</Text>
         </View>
-        <View style={styles.inputContainer}>
-          <View style={styles.inputWrapper}>
-            <Icon name="user" size={20} color="white" style={styles.icon} />
-            <TextInput
-              value={email}
-              onChangeText={this.handleEmailChange}
-              style={styles.textInput}
-              placeholder="Enter your email"
-              placeholderTextColor={"white"}
-              
-            />
-          </View>
-          <View style={styles.inputWrapper}>
-            <Icon name="lock" size={20} color="white" style={styles.icon} />
-            <TextInput
-              value={password}
-              onChangeText={this.handlePasswordChange}
-              style={styles.textInput}
-              placeholder="Enter your password"
-              secureTextEntry={true}
-              placeholderTextColor={"white"}
-            />
-          </View>
-        </View>
-        <View style={styles.checkboxContainer}>
-          <Checkbox
-            status={rememberMe ? 'checked' : 'unchecked'}
-            onPress={this.toggleRememberMe}
-            style={styles.checkbox}
-            color='white'
+        <View style={styles.inputWrapper}>
+          <Icon name="lock" size={20} color="white" style={styles.icon} />
+          <TextInput
+            value={password}
+            onChangeText={setPassword}
+            style={styles.textInput}
+            placeholder="Enter your password"
+            secureTextEntry={true}
+            placeholderTextColor="white"
           />
-          <Text style={styles.checkboxLabel}>Remember me</Text>
-          <TouchableOpacity onPress={() => {}} style={styles.forgotPasswordContainer}>
-            <Text style={styles.forgotPassword}>Forgot Password?</Text>
-          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        <View style={{height:30}}/>
-        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-          <Text style={{
-            color:"white"
-          }}>
-            CREATE ACCOUNT
-          </Text>
+      </View>
+      <View style={styles.checkboxContainer}>
+        <Checkbox
+          status={rememberMe ? 'checked' : 'unchecked'}
+          onPress={() => setRememberMe(!rememberMe)}
+          style={styles.checkbox}
+          color="white"
+        />
+        <Text style={styles.checkboxLabel}>Remember me</Text>
+        <TouchableOpacity onPress={() => {}} style={styles.forgotPasswordContainer}>
+          <Text style={styles.forgotPassword}>Forgot Password?</Text>
         </TouchableOpacity>
       </View>
-    );
-  }
-}
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.buttonText}>Login</Text>
+      </TouchableOpacity>
+      <View style={{ height: 30 }} />
+      <TouchableOpacity onPress={() => navigation.navigate('Register')} style={styles.createAccountButton}>
+        <Text style={styles.createAccountText}>
+          CREATE ACCOUNT
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -156,7 +137,7 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     height: 40,
-    color:'white'
+    color: 'white',
   },
   checkboxContainer: {
     flexDirection: 'row',
@@ -168,7 +149,7 @@ const styles = StyleSheet.create({
   },
   checkboxLabel: {
     marginRight: 20,
-    color:"white"
+    color: 'white',
   },
   forgotPasswordContainer: {
     marginLeft: 50,
@@ -187,9 +168,15 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'black',
-    fontFamily:'Poppins-Bold',
+    fontFamily: 'Poppins-Bold',
     marginLeft: 10,
     fontSize: 16,
+  },
+  createAccountButton: {
+    marginTop: 10,
+  },
+  createAccountText: {
+    color: 'white',
   },
 });
 
