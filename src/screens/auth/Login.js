@@ -11,23 +11,28 @@ const Login = ({ navigation }) => {
 
   const handleLogin = async () => {
     try {
-      // console.log('Sending email:', email);
-      // console.log('Sending password:', password);
+      console.log('Sending email:', email);
+      console.log('Sending password:', password);
   
-      const response = await axios.post('http://192.168.1.5:3000/users/login', { email, password });//gae ip dewe dewe rek ipconfig moro doleono Ipv4
+      const response = await axios.post('http://192.168.1.3:3000/users/login', { email, password });
       console.log('Response data:', response.data);
   
-      if (response.data.message === "Login successful") {
+      if (response.data.message === "gLogin successful") {
         Alert.alert('Login Success', 'You have logged in successfully');
       } else {
         Alert.alert('Login Error', 'Invalid email or password');
       }
     } catch (error) {
       console.error('Login error:', error);
-      console.error('Error response:', error.response);
-      Alert.alert('Login Error', 'An error occurred during login');
+      if (error.response) {
+        console.error('Error response:', error.response.data);
+        Alert.alert('Login Error', error.response.data.message || 'Invalid email or password');
+      } else {
+        Alert.alert('Login Error', 'An error occurred during login');
+      }
     }
   };
+  
 
 
   return (

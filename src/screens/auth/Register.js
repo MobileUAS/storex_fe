@@ -1,25 +1,39 @@
-import React, {Component} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import React, {Component, useState} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
-class Register extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+const Register = ({ navigation }) => {
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleRegis = async () => {
+    try {
+
+    } catch (error) {
+
+    }
   }
-
-  render() {
-    const {navigation} = this.props;
-
-    return (
-      <View>
-        <Text>Ini Register Page</Text>
-
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text>Masuk Ke Login</Text>
-        </TouchableOpacity>
+  return (
+    <View style={style.container}>
+      <View style={style.header}>
+        <Image/>
       </View>
-    );
-  }
+    </View>
+  )
 }
+
+const style = StyleSheet.create({
+  container:{
+    flext:1,
+    backgroundColor:'#0A6847',
+    alignItems:'center',
+    justifyContent:'center'
+  }, 
+  header: {
+    justifyContent:'center',
+    alignItems:'center',
+    marginBottom:30
+  }
+})
 
 export default Register;
