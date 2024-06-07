@@ -1,25 +1,13 @@
 import React from 'react';
-
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import AppNavigator from './src/navigation/AppNavigator';
 
-import Home from './src/screens/Home';
-import Search from './src/screens/Search';
-import Library from './src/screens/Library';
-const Stack = createNativeStackNavigator();
-
-function App() {
+const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="SplashScreen"
-        screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Search" component={Search} />
-        <Stack.Screen name="Library" component={Library} />
-      </Stack.Navigator>
+      <AppNavigator />
     </NavigationContainer>
   );
-}
+};
 
 export default App;
