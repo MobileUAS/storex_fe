@@ -12,7 +12,7 @@ const Product = () => {
 
   const handleProduct = async () => {
     try {
-      const response = await axios.get('http://192.168.253.173:3000/products');
+      const response = await axios.get('http://18.18.18.134:3000/products');
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -21,15 +21,17 @@ const Product = () => {
 
   const handleSave = async () => {
     try {
+      const { nama, harga, jumlah } = selectedProduct;
+
       if (isCreating) {
-        const { nama, harga, jumlah } = selectedProduct;
-        await axios.post('http://192.168.253.173:3000/products', { nama, harga, jumlah });
+        await axios.post('http://18.18.18.134:3000/products', { nama, harga, jumlah });
         Alert.alert("Create", "Product created successfully.");
       } else {
-        const { _id, nama, harga, jumlah } = selectedProduct;
-        await axios.put(`http://192.168.253.173:3000/products/${_id}`, { nama, harga, jumlah });
+        const { _id } = selectedProduct;
+        await axios.put(`http://18.18.18.134:3000/products/${_id}`, { nama, harga, jumlah });
         Alert.alert("Update", `Product with id ${_id} updated.`);
       }
+
       handleProduct(); // Refresh the product list
       setModalVisible(false);
     } catch (error) {
@@ -40,7 +42,7 @@ const Product = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://192.168.253.173:3000/products/${id}`);
+      await axios.delete(`http://18.18.18.134:3000/products/${id}`);
       Alert.alert("Delete", `Product with id ${id} deleted.`);
       handleProduct(); // Refresh the product list
     } catch (error) {
@@ -82,11 +84,7 @@ const Product = () => {
       {products.map((product) => (
         <View key={product._id} style={style.item}>
           <View>
-            <Text  style={{
-              color:'#0A6847',
-              fontFamily:'Poppins-Regular',
-              marginBottom:5
-            }}>{product.nama}</Text>
+            <Text style={style.productName}>{product.nama}</Text>
             <Text>{product.harga}</Text>
             <Text>{product.jumlah}</Text>
           </View>
@@ -212,6 +210,11 @@ const style = StyleSheet.create({
     color: "black",
     fontFamily: "Poppins-Bold",
     fontSize: 15,
+  },
+  productName: {
+    color: '#0A6847',
+    fontFamily: 'Poppins-Regular',
+    marginBottom: 5,
   },
 });
 

@@ -14,9 +14,9 @@ const Login = ({ navigation }) => {
       console.log('Sending email:', email);
       console.log('Sending password:', password);
   
-      const response = await axios.post('http://192.168.1.3:3000/users/login', { email, password });
+      const response = await axios.post('http://18.18.18.134:3000/users/login', { email, password });
       console.log('Response data:', response.data);
-  
+      navigation.navigate('Product')
       if (response.data.message === "gLogin successful") {
         Alert.alert('Login Success', 'You have logged in successfully');
       } else {
