@@ -8,6 +8,7 @@ import Product from '../screens/content/Product';
 import Supplier from '../screens/content/Supplier';
 import Distributor from '../screens/content/Distributor';
 import Reports from '../screens/content/Reports';
+import LoginSignup from '../screens/auth/LoginSignup';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ const AppNavigator = () => {
       initialRouteName="SplashScreen"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="SplashScreen" component={SplashScreen} />
+      <Stack.Screen name="LoginSignup" component={LoginSignup} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Dashboard" component={Dashboard} />
