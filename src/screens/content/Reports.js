@@ -9,7 +9,7 @@ const Reports = () => {
 
     const fetchReports = async () => {
         try {
-            const response = await axios.get('http://192.168.253.173:3000/reports'); // Ganti URL ini dengan URL backend Anda
+            const response = await axios.get('http://18.18.18.134:3000/reports'); // Ganti URL ini dengan URL backend Anda
             setReports(response.data);
         } catch (error) {
             console.error(error);

@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
+import React, { Component } from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import Header from '../../components/Header';
 import User from '../../components/User';
 
@@ -12,7 +12,11 @@ class Dashboard extends Component {
 
   renderCard(data) {
     return (
-      <View style={styles.cardContainer} key={data.id}>
+      <TouchableOpacity
+        style={styles.cardContainer}
+        key={data.id}
+        onPress={() => this.handleCardPress(data.id)}
+      >
         <View style={styles.titleContainer}>
           <Text style={styles.titleText}>{data.title}</Text>
         </View>
@@ -23,8 +27,28 @@ class Dashboard extends Component {
             <Text style={styles.itemText}>{data.itemPrice}</Text>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
+  }
+
+  handleCardPress(id) {
+    const { navigation } = this.props;
+    switch (id) {
+      case 1:
+        navigation.navigate('Product');
+        break;
+      case 2:
+        navigation.navigate('Supplier');
+        break;
+      case 3:
+        navigation.navigate('Distributor');
+        break;
+      case 4:
+        navigation.navigate('Reports');
+        break;
+      default:
+        break;
+    }
   }
 
   render() {
@@ -34,21 +58,28 @@ class Dashboard extends Component {
         title: 'Detail Stock Product',
         image: require('../../../assets/images/icon/inventory.png'),
         itemName: 'Product On Stock',
-        itemPrice: 'Rp. 15.000',
+        itemPrice: '6000',
       },
       {
         id: 2,
-        title: 'Detail Stock Product',
+        title: 'Detail Supplier',
         image: require('../../../assets/images/icon/inventory.png'),
-        itemName: 'Product On Stock',
-        itemPrice: 'Rp. 15.000',
+        itemName: 'Amount Of Supplier',
+        itemPrice: '10.000',
       },
       {
         id: 3,
-        title: 'Detail Stock Product',
+        title: 'Detail Distributor',
         image: require('../../../assets/images/icon/inventory.png'),
-        itemName: 'Product On Stock',
-        itemPrice: 'Rp. 15.000',
+        itemName: 'Amount Of Distributor',
+        itemPrice: '5000',
+      },
+      {
+        id: 4,
+        title: 'Detail Reports',
+        image: require('../../../assets/images/icon/inventory.png'),
+        itemName: 'Reports',
+        itemPrice: '4000',
       },
       // Add more card data as needed
     ];
@@ -58,7 +89,7 @@ class Dashboard extends Component {
         <Header />
         <User />
         <View style={styles.content}>
-          {cardData.map(item => this.renderCard(item))}
+          {cardData.map((item) => this.renderCard(item))}
         </View>
       </ScrollView>
     );
@@ -71,24 +102,27 @@ const styles = StyleSheet.create({
   },
   content: {
     marginTop: 30,
+    alignItems: 'center', // Center content horizontally
   },
   cardContainer: {
+    width: '90%', // Fixed width for all cards
     alignItems: 'center',
-    margin: 10,
+    marginVertical: 10, // Adjusted for vertical margin consistency
   },
   titleContainer: {
     backgroundColor: '#27795b',
-    paddingTop: 6,
-    paddingBottom: 7,
-    paddingLeft: 33,
-    paddingRight: 33,
+    paddingVertical: 7,
+    paddingHorizontal: 33,
     borderRadius: 10,
     elevation: 5,
+    width: '100%', // Ensure it takes full card width
+    alignItems: 'center', // Center the title text horizontally
   },
   titleText: {
     color: 'white',
     fontFamily: 'Poppins-Regular',
     fontSize: 20,
+    textAlign: 'center', // Ensure the text is centered
   },
   itemContainer: {
     marginTop: 5,
@@ -97,16 +131,21 @@ const styles = StyleSheet.create({
     paddingTop: 25,
     paddingBottom: 25,
     flexDirection: 'row',
-    gap: 10,
     alignItems: 'center',
     backgroundColor: '#f6e9b2',
     elevation: 1,
+    width: '100%', // Ensure it takes full card width
   },
-  inventoryIcon: {},
+  inventoryIcon: {
+    width: 50,
+    height: 50,
+    resizeMode: 'contain', // Maintain aspect ratio of the icon
+  },
   itemText: {
     fontSize: 20,
     fontFamily: 'Poppins-Regular',
     color: 'black',
+    marginLeft: 10, // Ensure there's space between the icon and text
   },
 });
 
