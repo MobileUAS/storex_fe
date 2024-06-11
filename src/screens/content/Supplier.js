@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
 import { connection } from '../../../connection';
 import Header from '../../components/Header';
+import User from '../../components/User';
 
 const Supplier = () => {
   const [Supplier, setSupplier] = useState([]);
@@ -76,6 +77,7 @@ const Supplier = () => {
   return (
     <ScrollView>
       <Header/>
+      <User/>
       <View style={style.container}>
       <View style={style.newButton}>
         <View style={style.header}>

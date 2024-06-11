@@ -5,6 +5,7 @@ import axios from 'axios';
 import RNPickerSelect from 'react-native-picker-select';
 import { connection } from '../../../connection';
 import Header from '../../components/Header';
+import User from '../../components/User';
 
 const Reports = () => {
     const [reports, setReports] = useState([]);
@@ -137,6 +138,7 @@ const Reports = () => {
     return (
         <ScrollView>
             <Header/>
+            <User/>
             <View style={styles.container}>
             <View style={styles.newbutton}>
                 <View style={{ backgroundColor: "#0A6847", marginRight: 20, borderRadius: 10, paddingHorizontal: 10 }}>

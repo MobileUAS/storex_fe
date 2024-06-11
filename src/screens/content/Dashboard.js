@@ -98,7 +98,7 @@ class Dashboard extends Component {
 
 const styles = StyleSheet.create({
   baseApp: {
-    backgroundColor: '#f5f3e8',
+    backgroundColor: '#FDFFE2',
   },
   content: {
     marginTop: 30,
