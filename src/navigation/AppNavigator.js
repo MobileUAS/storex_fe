@@ -9,6 +9,7 @@ import Supplier from '../screens/content/Supplier';
 import Distributor from '../screens/content/Distributor';
 import Reports from '../screens/content/Reports';
 import LoginSignup from '../screens/auth/LoginSignup';
+import ResetPassword from '../screens/auth/resetPassword';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ const AppNavigator = () => {
       <Stack.Screen name="SplashScreen" component={SplashScreen} />
       <Stack.Screen name="LoginSignup" component={LoginSignup} />
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Reset" component={ResetPassword}/>
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Dashboard" component={Dashboard} />
       <Stack.Screen name="Product" component={Product} />

@@ -84,7 +84,7 @@ const Login = ({ navigation }) => {
           color="white"
         />
         <Text style={styles.checkboxLabel}>Remember me</Text>
-        <TouchableOpacity onPress={() => {}} style={styles.forgotPasswordContainer}>
+        <TouchableOpacity onPress={() => {navigation.navigate('Reset')}} style={styles.forgotPasswordContainer}>
           <Text style={styles.forgotPassword}>Forgot Password?</Text>
         </TouchableOpacity>
       </View>
