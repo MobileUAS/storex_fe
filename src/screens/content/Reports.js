@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TextInput, Modal, Alert, TouchableO
 import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
 import RNPickerSelect from 'react-native-picker-select';
+import { connection } from '../../../connection';
 
 const Reports = () => {
     const [reports, setReports] = useState([]);
@@ -22,7 +23,7 @@ const Reports = () => {
 
     const fetchReports = async () => {
         try {
-            const response = await axios.get('http://192.168.1.2:3000/reports');
+            const response = await axios.get(`http://${connection}reports`);
             setReports(response.data);
         } catch (error) {
             console.error(error);
@@ -31,7 +32,7 @@ const Reports = () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await axios.get('http://192.168.1.2:3000/products');
+            const response = await axios.get(`http://${connection}products`);
             setProducts(response.data);
         } catch (error) {
             console.error(error);
@@ -40,7 +41,7 @@ const Reports = () => {
 
     const fetchSuppliers = async () => {
         try {
-            const response = await axios.get('http://192.168.1.2:3000/supliers');
+            const response = await axios.get(`http://${connection}supliers`);
             setSuppliers(response.data);
         } catch (error) {
             console.error(error);
@@ -49,7 +50,7 @@ const Reports = () => {
 
     const fetchDistributors = async () => {
         try {
-            const response = await axios.get('http://192.168.1.2:3000/distributors');
+            const response = await axios.get(`http://${connection}distributors`);
             setDistributors(response.data);
         } catch (error) {
             console.error(error);
@@ -84,9 +85,9 @@ const Reports = () => {
     const handleCreateOrUpdateReport = async () => {
         try {
             if (currentReport) {
-                await axios.put(`http://192.168.1.2:3000/reports/${currentReport._id}`, formData);
+                await axios.put(`http://${connection}reports/${currentReport._id}`, formData);
             } else {
-                await axios.post('http://192.168.1.2:3000/reports', formData);
+                await axios.post(`http://${connection}reports`, formData);
             }
             setModalVisible(false);
             fetchReports();
@@ -111,7 +112,7 @@ const Reports = () => {
 
     const handleDeleteReport = async (id) => {
         try {
-            await axios.delete(`http://192.168.1.2:3000/reports/${id}`);
+            await axios.delete(`http://${connection}reports/${id}`);
             fetchReports();
         } catch (error) {
             console.error(error);

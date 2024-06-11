@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Checkbox } from 'react-native-paper';
 import axios from 'axios';
 import { UserContext } from '../../../reactContext';
+import { connection } from '../../../connection';
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -16,7 +17,7 @@ const Login = ({ navigation }) => {
       console.log('Sending email:', email);
       console.log('Sending password:', password);
 
-      const response = await axios.post('http://192.168.18.160:3000/users/login', { email, password });
+      const response = await axios.post(`http://${connection}users/login`, { email, password });
       console.log('Response data:', response.data);
 
       const message = response.data.message?.toLowerCase();

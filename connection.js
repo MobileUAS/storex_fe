@@ -1,0 +1,1 @@
+export const connection = '192.168.18.160:3000/'//Gantien dewe dewe

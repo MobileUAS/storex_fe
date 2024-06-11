@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, TextInput, Alert } fro
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
+import { connection } from '../../../connection';
 
 const Register = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -11,7 +12,7 @@ const Register = ({ navigation }) => {
 
   const handleRegis = async () => {
     try {
-      const response = await axios.post('http://192.168.1.2:3000/users/regis', { username, email, password });
+      const response = await axios.post(`http://${connection}users/regis`, { username, email, password });
       console.log('Response data:', response.data);
   
       if (response.data.message === "User registered successfully") {

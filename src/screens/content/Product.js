@@ -3,6 +3,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert, Modal, Butt
 import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
+import { connection } from '../../../connection';
 
 const Product = () => {
   const [products, setProducts] = useState([]);
@@ -12,7 +13,7 @@ const Product = () => {
 
   const handleProduct = async () => {
     try {
-      const response = await axios.get('http://18.18.18.134:3000/products');
+      const response = await axios.get(`http://${connection}products`);
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -24,11 +25,11 @@ const Product = () => {
       const { nama, harga, jumlah } = selectedProduct;
 
       if (isCreating) {
-        await axios.post('http://18.18.18.134:3000/products', { nama, harga, jumlah });
+        await axios.post(`http://${connection}products`, { nama, harga, jumlah });
         Alert.alert("Create", "Product created successfully.");
       } else {
         const { _id } = selectedProduct;
-        await axios.put(`http://18.18.18.134:3000/products/${_id}`, { nama, harga, jumlah });
+        await axios.put(`http://${connection}products/${_id}`, { nama, harga, jumlah });
         Alert.alert("Update", `Product with id ${_id} updated.`);
       }
 
