@@ -43,7 +43,7 @@ const Product = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://18.18.18.134:3000/products/${id}`);
+      await axios.delete(`http://${connection}products/${id}`);
       Alert.alert("Delete", `Product with id ${id} deleted.`);
       handleProduct(); // Refresh the product list
     } catch (error) {
