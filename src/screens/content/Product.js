@@ -4,6 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
 import { connection } from '../../../connection';
+import Header from '../../components/Header';
 
 const Product = () => {
   const [products, setProducts] = useState([]);
@@ -73,7 +74,9 @@ const Product = () => {
   }, []);
 
   return (
-    <ScrollView style={style.container}>
+    <ScrollView>
+      <Header/>
+      <View style={style.container}>
       <View style={style.newButton}>
         <View style={style.header}>
           <Text style={style.headerText}>Products Detail</Text>
@@ -135,6 +138,7 @@ const Product = () => {
           </View>
         </Modal>
       )}
+      </View>
     </ScrollView>
   );
 };

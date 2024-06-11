@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
 import RNPickerSelect from 'react-native-picker-select';
 import { connection } from '../../../connection';
+import Header from '../../components/Header';
 
 const Reports = () => {
     const [reports, setReports] = useState([]);
@@ -134,7 +135,9 @@ const Reports = () => {
     };
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView>
+            <Header/>
+            <View style={styles.container}>
             <View style={styles.newbutton}>
                 <View style={{ backgroundColor: "#0A6847", marginRight: 20, borderRadius: 10, paddingHorizontal: 10 }}>
                     <Text style={{ margin: 10, color: "white", fontWeight: "bold", fontSize: 18 }}>Reports Details</Text>
@@ -264,6 +267,7 @@ const Reports = () => {
                     </TouchableOpacity>
                 </View>
             </Modal>
+            </View>
         </ScrollView>
     );
 };
