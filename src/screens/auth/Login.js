@@ -1,24 +1,30 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, TouchableOpacity, Image, TextInput, StyleSheet, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Checkbox } from 'react-native-paper';
 import axios from 'axios';
+import { UserContext } from '../../../reactContext';
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const  {setUser} = useContext(UserContext)
 
   const handleLogin = async () => {
     try {
       console.log('Sending email:', email);
       console.log('Sending password:', password);
-  
-      const response = await axios.post('http://192.168.1.2:3000/users/login', { email, password });
+
+      const response = await axios.post('http://192.168.18.160:3000/users/login', { email, password });
       console.log('Response data:', response.data);
-      navigation.navigate('Dashboard')
-      if (response.data.message === "gLogin successful") {
+
+      const message = response.data.message?.toLowerCase();
+      if (message === "login successful" || message.includes("login successful")) {
+        const user = response.data.user;
+        setUser(user); // Save user data to context
         Alert.alert('Login Success', 'You have logged in successfully');
+        navigation.navigate('Dashboard');
       } else {
         Alert.alert('Login Error', 'Invalid email or password');
       }
@@ -33,7 +39,6 @@ const Login = ({ navigation }) => {
     }
   };
   
-
 
   return (
     <View style={styles.container}>
